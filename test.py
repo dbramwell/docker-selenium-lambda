@@ -5,7 +5,6 @@ from tempfile import mkdtemp
 def handler(event=None, context=None):
     options = webdriver.ChromeOptions()
     options.binary_location = '/opt/chrome/chrome'
-    options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument("--disable-gpu")
     options.add_argument("--window-size=1280x1696")

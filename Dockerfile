@@ -9,9 +9,11 @@ FROM public.ecr.aws/lambda/python@sha256:72125c001b044177a1be2b187464d36f5be17bc
 RUN yum install atk cups-libs gtk3 libXcomposite alsa-lib \
     libXcursor libXdamage libXext libXi libXrandr libXScrnSaver \
     libXtst pango at-spi2-atk libXt xorg-x11-server-Xvfb \
-    xorg-x11-xauth dbus-glib dbus-glib-devel -y
+    xorg-x11-xauth dbus-glib dbus-glib-devel procps xdpyinfo -y
 RUN pip install selenium
 COPY --from=build /opt/chrome-linux /opt/chrome
 COPY --from=build /opt/chromedriver /opt/
 COPY test.py ./
+COPY entrypoint.sh /
 CMD [ "test.handler" ]
+ENTRYPOINT ["/entrypoint.sh"]
