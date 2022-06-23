@@ -1,9 +1,9 @@
 FROM public.ecr.aws/lambda/python@sha256:72125c001b044177a1be2b187464d36f5be17bcbbd7af6246d4eea148cf6fcd3 as build
-RUN yum install -y unzip && \
-    curl -Lo "/tmp/chromedriver.zip" "https://chromedriver.storage.googleapis.com/103.0.5060.24/chromedriver_linux64.zip" && \
-    curl -Lo "/tmp/chrome-linux.zip" "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F1002910%2Fchrome-linux.zip?alt=media" && \
+RUN yum install -y unzip tar xz && \
+    curl -Lo "/tmp/chromedriver.zip" "https://chromedriver.storage.googleapis.com/102.0.5005.61/chromedriver_linux64.zip" && \
+    curl -Lo "/tmp/chrome-linux.tar.xz" "https://github.com/macchrome/linchrome/releases/download/v102.0.5005.63-r992738-portable-ungoogled-Lin64/ungoogled-chromium_102.0.5005.63_1.vaapi_linux.tar.xz" && \
     unzip /tmp/chromedriver.zip -d /opt/ && \
-    unzip /tmp/chrome-linux.zip -d /opt/
+    mkdir /opt/chrome-linux && tar xvf /tmp/chrome-linux.tar.xz -C /opt/chrome-linux --strip-components=1
 
 FROM public.ecr.aws/lambda/python@sha256:72125c001b044177a1be2b187464d36f5be17bcbbd7af6246d4eea148cf6fcd3
 RUN yum install atk cups-libs gtk3 libXcomposite alsa-lib \
