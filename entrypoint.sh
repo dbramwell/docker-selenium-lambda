@@ -1,7 +1,4 @@
 #!/bin/bash
-# Remove any lingering Xvfb/Chrome stuff
-kill $(pgrep chrome) $(pgrep Xvfb)
-rm -rf /tmp/{..?*,.[!.]*,*}
 export DISPLAY=:99
 /usr/bin/Xvfb "$DISPLAY" -screen 0 1280x800x24 &
 
