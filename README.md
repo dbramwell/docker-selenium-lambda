@@ -4,10 +4,10 @@ This is minimum demo of headless chrome and selenium on container image on AWS L
 
 This image goes with these versions. [These are automatically updated and tested everyday. ![CircleCI](https://circleci.com/gh/umihico/docker-selenium-lambda/tree/circleci.svg?style=svg)](https://circleci.com/gh/umihico/docker-selenium-lambda/tree/circleci)
 
-- Python 3.9.12
-- chromium 103.0.5060.0
-- chromedriver 103.0.5060.24
-- selenium 4.2.0
+- Python 3.9.13
+- chromium 106.0.5249.0
+- chromedriver 106.0.5249.21
+- selenium 4.4.3
 
 
 ## Running the demo
@@ -19,6 +19,19 @@ $ sls create --template-url "https://github.com/umihico/docker-selenium-lambda/t
 $ sls deploy
 $ sls invoke --function demo # Yay! You will get texts of example.com
 ```
+
+## Public image is available
+
+If you want your image simplier and updated automatically, rewrite the Dockerfile with the following commands:
+
+```Dockerfile
+FROM umihico/aws-lambda-selenium-python:latest
+
+COPY main.py ./
+CMD [ "main.handler" ]
+```
+
+Available tags are listed [here](https://hub.docker.com/r/umihico/aws-lambda-selenium-python/tags)
 
 ## Side Project
 
